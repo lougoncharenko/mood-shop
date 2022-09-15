@@ -8,8 +8,8 @@ body {
   }
 
   .page-header {
-    padding: 30px;
-    background-color: bisque;
+    padding: 20px;
+    background-color: rgb(169, 59, 99);
 }
 
 .page-header ul {
@@ -29,4 +29,10 @@ body {
     display: block;
     padding:0.5em;
     text-decoration:none;
+    font-size: 20px;
+    color: white;
+  }
+
+  .page-header a:hover{
+    color: black;
   }
