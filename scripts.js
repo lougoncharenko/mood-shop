@@ -22,6 +22,11 @@ for(let i = 0; i <data.length; i += 1){
     const price = document.createElement('P');
     price.innerText = data[i].price;
     newDiv.appendChild(price);
+    const button = document.createElement('button'); // Make a button 
+    button.id = data[i].name; //add an  id name to the button
+    button.dataset.price = data[i].price //creates a custom attribute called data-price.
+    button.innerHTML = "Add to Cart";
+    newDiv.appendChild(button) ;
     itemsContainer.appendChild(newDiv); //adds newDiv to item container in html  
 }
 
