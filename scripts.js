@@ -33,3 +33,12 @@ for(let i = 0; i <data.length; i += 1){
 //shopping cart
 const cart = [];
 
+function addToCart(name, price) {
+    cart.push(name);
+
+}
+
+function showCartItems() {
+    console.log(cart);
+}
+
