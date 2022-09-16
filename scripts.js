@@ -30,3 +30,6 @@ for(let i = 0; i <data.length; i += 1){
     itemsContainer.appendChild(newDiv); //adds newDiv to item container in html  
 }
 
+//shopping cart
+const cart = [];
+
