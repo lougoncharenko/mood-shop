@@ -30,13 +30,33 @@ for(let i = 0; i <data.length; i += 1){
     itemsContainer.appendChild(newDiv); //adds newDiv to item container in html  
 }
 
+// const obj = {
+//     name: 'Shoe',
+//     price: 9.99,
+//     qty: 3
+// }
+
+// console.log(obj)
+
+
 //shopping cart
 const cart = [];
 
-function addToCart(name, price) {
-    cart.push(name);
 
+function addToCart(name, price) {
+    //create an object to store name, price and qty
+    const item = {
+        name: name,
+        price: price,
+        qty: 1
+    }
+    cart.push(item); //pushes item object in the cart
+    console.log(cart);
 }
+
+addToCart ('apple', 7.00);
+addToCart ('oranges', 6.55);
+
 
 function showCartItems() {
     console.log(cart);
