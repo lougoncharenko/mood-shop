@@ -59,6 +59,9 @@ addToCart ('oranges', 6.55);
 
 
 function showCartItems() {
-    console.log(cart);
+    console.log(`You have ${cart.length} in your cart`); 
+    for(let i =0; i < cart.length; i += 1) {
+        console.log(`${cart[i].name}, ${cart[i].price}, ${cart[i].qty}`);
+    }
 }
 
