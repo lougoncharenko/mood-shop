@@ -30,20 +30,18 @@ for(let i = 0; i <data.length; i += 1){
     itemsContainer.appendChild(newDiv); //adds newDiv to item container in html  
 }
 
-// const obj = {
-//     name: 'Shoe',
-//     price: 9.99,
-//     qty: 3
-// }
-
-// console.log(obj)
-
-
 //shopping cart
 const cart = [];
 
 
 function addToCart(name, price) {
+    for (let i = 0; i < cart.length; i += 1){
+        if(cart[i].name === name){
+            cart[i].qty += 1
+            return 
+        }
+    }
+
     //create an object to store name, price and qty
     const item = {
         name: name,
@@ -54,14 +52,20 @@ function addToCart(name, price) {
     console.log(cart);
 }
 
-addToCart ('apple', 7.00);
-addToCart ('oranges', 6.55);
-
 
 function showCartItems() {
-    console.log(`You have ${cart.length} in your cart`); 
+    let qty = 0;
+    for(let i =0; i < cart.length; i += 1){
+        qty += cart[i].qty;
+
+    }
+    console.log(`You have ${qty} in your cart`); 
+
     for(let i =0; i < cart.length; i += 1) {
-        console.log(`${cart[i].name}, ${cart[i].price}, ${cart[i].qty}`);
+        console.log(`-${cart[i].name}, $${cart[i].price} x ${cart[i].qty}`);
     }
 }
 
+addToCart ('apple', 7.00);
+addToCart ('oranges', 6.55);
+showCartItems();
