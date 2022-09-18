@@ -52,25 +52,36 @@ function addToCart(name, price) {
     console.log(cart);
 }
 
-
+//show items
 function showCartItems() {
-    //for loop calculates & displays qty
-    let qty = 0;
-    for(let i =0; i < cart.length; i += 1){
-        qty += cart[i].qty;
-
-    }
-    console.log(`You have ${qty} in your cart`); 
+    const qty = getQty();
+    console.log(`You have ${qty} in your cart`); //calls function and prints it out at the same time
 
     for(let i =0; i < cart.length; i += 1) {
         console.log(`-${cart[i].name}, $${cart[i].price} x ${cart[i].qty}`);
     }
+    let total = calculateTotal();
+    console.log(`the total is ${total}`);
+}
+
+//get quantity
+function getQty(){
+    //for loop calculates & displays qty
+    let qty = 0;
+    for(let i =0; i < cart.length; i += 1){
+        qty += cart[i].qty;
+       }
+       return qty;
+}
+
+// calculate total
+function calculateTotal(){
     //for loop calculates and displays total
     let total = 0;
     for (let i = 0; i < cart.length; i += 1){
         total += cart[i].price * cart[1].qty;
     }
-    console.log(`the total is ${total}`);
+    return total.toFixed(2);
 }
 
 addToCart ('apple', 7.00);
