@@ -54,6 +54,7 @@ function addToCart(name, price) {
 
 
 function showCartItems() {
+    //for loop calculates & displays qty
     let qty = 0;
     for(let i =0; i < cart.length; i += 1){
         qty += cart[i].qty;
@@ -64,6 +65,12 @@ function showCartItems() {
     for(let i =0; i < cart.length; i += 1) {
         console.log(`-${cart[i].name}, $${cart[i].price} x ${cart[i].qty}`);
     }
+    //for loop calculates and displays total
+    let total = 0;
+    for (let i = 0; i < cart.length; i += 1){
+        total += cart[i].price * cart[1].qty;
+    }
+    console.log(`the total is ${total}`);
 }
 
 addToCart ('apple', 7.00);
