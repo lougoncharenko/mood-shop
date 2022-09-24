@@ -33,7 +33,8 @@ for(let i = 0; i <data.length; i += 1){
 //shopping cart
 const cart = [];
 
-
+//---------------------------------------------------------------------------
+//add item
 function addToCart(name, price) {
     for (let i = 0; i < cart.length; i += 1){
         if(cart[i].name === name){
@@ -52,6 +53,7 @@ function addToCart(name, price) {
     console.log(cart);
 }
 
+//---------------------------------------------------------------------------
 //show items
 function showCartItems() {
     const qty = getQty();
@@ -64,6 +66,7 @@ function showCartItems() {
     console.log(`the total is ${total}`);
 }
 
+//---------------------------------------------------------------------------
 //get quantity
 function getQty(){
     //for loop calculates & displays qty
@@ -74,6 +77,7 @@ function getQty(){
        return qty;
 }
 
+//---------------------------------------------------------------------------
 // calculate total
 function calculateTotal(){
     //for loop calculates and displays total
@@ -83,7 +87,28 @@ function calculateTotal(){
     }
     return total.toFixed(2);
 }
+//---------------------------------------------------------------------------
+//remove item
+function removeItem(name){
+    for(let i = 0; i < cart.length; i += 1){
+        if(cart[i].name === name){
+            cart[i].qty -= 1;
+            if (cart[i].qty === 0){
+                cart.splice(i,1)
+            }
+         
+            return
+        }
+    }
+}
+
 
 addToCart ('apple', 7.00);
 addToCart ('oranges', 6.55);
+addToCart ('apple', 7.00);
+addToCart ('oranges', 6.55);
+addToCart ('frisbee', 4.00);
+addToCart ('oranges', 6.55);
 showCartItems();
+removeItem('apple')
+showCartItems()
