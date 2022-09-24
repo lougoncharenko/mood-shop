@@ -89,15 +89,17 @@ function calculateTotal(){
 }
 //---------------------------------------------------------------------------
 //remove item
-function removeItem(name){
+function removeItem(name, qty = 0){
     for(let i = 0; i < cart.length; i += 1){
         if(cart[i].name === name){
-            cart[i].qty -= 1;
-            if (cart[i].qty === 0){
+            if (qty > 0){
+                cart[i].qty -= qty;
+            }
+            if (cart[i].qty < 1 || qty === 0){
                 cart.splice(i,1)
             }
-         
-            return
+       
+        return
         }
     }
 }
@@ -110,5 +112,5 @@ addToCart ('oranges', 6.55);
 addToCart ('frisbee', 4.00);
 addToCart ('oranges', 6.55);
 showCartItems();
-removeItem('apple')
+removeItem('apple', 2)
 showCartItems()
