@@ -2,6 +2,7 @@ import data from './data.js'
 
 //define Variables
 const itemsContainer = document.querySelector('#items');
+const itemList = document.getElementById('item-list');
 
 
 
@@ -59,9 +60,12 @@ function showCartItems() {
     const qty = getQty();
     console.log(`You have ${qty} in your cart`); //calls function and prints it out at the same time
 
+    let itemStr = ' '
     for(let i =0; i < cart.length; i += 1) {
-        console.log(`-${cart[i].name}, $${cart[i].price} x ${cart[i].qty}`);
+        itemStr += `<li> ${cart[i].name}, $${cart[i].price} x ${cart[i].qty} =  $${cart[i].price * cart[i].qty} </li>`;
     }
+
+    itemList.innerHTML = itemStr;
     let total = calculateTotal();
     console.log(`the total is ${total}`);
 }
