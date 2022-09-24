@@ -3,6 +3,8 @@ import data from './data.js'
 //define Variables
 const itemsContainer = document.querySelector('#items');
 const itemList = document.getElementById('item-list');
+const itemMessage = document.getElementById('item-message');
+const cartTotal =document.getElementById('cart-total');
 
 
 
@@ -57,8 +59,8 @@ function addToCart(name, price) {
 //---------------------------------------------------------------------------
 //show items
 function showCartItems() {
-    const qty = getQty();
-    console.log(`You have ${qty} in your cart`); //calls function and prints it out at the same time
+    const qty = getQty(); //calls function and returns total at the same time
+    itemMessage.innerHTML = `You have ${qty} items in your cart`;
 
     let itemStr = ' '
     for(let i =0; i < cart.length; i += 1) {
@@ -67,7 +69,8 @@ function showCartItems() {
 
     itemList.innerHTML = itemStr;
     let total = calculateTotal();
-    console.log(`the total is ${total}`);
+    cartTotal.innerHTML = `Your cart total is ${total}`
+  
 }
 
 //---------------------------------------------------------------------------
