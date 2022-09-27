@@ -5,24 +5,17 @@ const itemsContainer = document.querySelector('#items');
 const itemList = document.getElementById('item-list');
 const cartQty = document.getElementById('cart-qty');
 const cartTotal =document.getElementById('cart-total');
-const cartButtons = Array.from(document.querySelectorAll("button"))
 
-console.log(cartButtons);
 
-//connecting the add to cart button to the shopping cart
-// cartButtons.forEach(e => e.addEventListener('click', () => {
-//     addToCart(e.getAttribute('name'), e.getAttribute('price'))
-//     showCartItems()
-//   }));
-
-  cartButtons.forEach(elt => elt.addEventListener('click', () =>{
-    console.log('Button clicked')
-  }))
-
-//   all_items_button.forEach( e => e.addEventListener('click', () => {
-//     addToCart(e.getAttribute('ied'), e.getAttribute('data-price'))
-//     showCartItems()
-//   }))
+//event delegation
+document.body.addEventListener('click', (e) => {
+    console.log(e.target, 'click')
+    if (e.target.matches('button')){
+        console.log(e.target.getAttribute('id'), e.target.getAttribute('data-price'))
+        addToCart(e.target.getAttribute('id'), e.target.getAttribute('data-price'))
+        showCartItems()
+    }
+})
  
 
 
@@ -51,6 +44,8 @@ for(let i = 0; i <data.length; i += 1){
     newDiv.appendChild(button) ;
     itemsContainer.appendChild(newDiv); //adds newDiv to item container in html  
 }
+
+
 
 //shopping cart
 const cart = [];
@@ -110,7 +105,7 @@ function calculateTotal(){
     //for loop calculates and displays total
     let total = 0;
     for (let i = 0; i < cart.length; i += 1){
-        total += cart[i].price * cart[1].qty;
+        total += cart[i].price * cart[i].qty;
     }
     return total.toFixed(2);
 }
