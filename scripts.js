@@ -8,14 +8,17 @@ const cartTotal =document.getElementById('cart-total');
 
 
 //event delegation
-document.body.addEventListener('click', (e) => {
-    console.log(e.target, 'click')
-    if (e.target.matches('button')){
-        console.log(e.target.getAttribute('id'), e.target.getAttribute('data-price'))
-        addToCart(e.target.getAttribute('id'), e.target.getAttribute('data-price'))
-        showCartItems()
-    }
-})
+// document.body.addEventListener('click', (e) => {
+//     console.log(e.target, 'click')
+//     if (e.target.matches('button')){
+//         console.log(e.target.getAttribute('id'), e.target.getAttribute('data-price'))
+//         addToCart(e.target.getAttribute('id'), e.target.getAttribute('data-price'))
+//         showCartItems()
+//     }
+//         if(e.target && e.target.classList.contains('remove')){
+
+    //    }
+// })
  
 
 
@@ -51,11 +54,39 @@ for(let i = 0; i <data.length; i += 1){
 const cart = [];
 
 //---------------------------------------------------------------------------
+//add to cart button
+const all_items_button = Array.from(document.querySelectorAll("button"))
+all_items_button.forEach(elt => elt.addEventListener('click', () => {
+    addToCart(elt.getAttribute('id'), elt.getAttribute('data-price'))
+    showCartItems()
+  }))
+//---------------------------------------------------------------------------
+//handle clicks on list
+itemList.onclick = function(e) {
+    if(e.target && e.target.classList.contains('remove')) {
+        const name = e.target.dataset.name; //data-name = "????"
+        removeItem(name);
+    } else if (e.target && e.target.classList.contains('add')){
+        console.log('add');
+        // const name = e.target.dataset.name;
+        // const price = e.target.dataset.price;
+        // addToCart(name, price);
+        const name = e.target.dataset.name; 
+        addToCart(name);
+    } else if (e.target && e.target.classList.contains('subtract')){
+        const name = e.target.dataset.name; //data-name = "????"
+        removeItem(name, 1);
+    }
+}
+
+
+//---------------------------------------------------------------------------
 //add item
 function addToCart(name, price) {
     for (let i = 0; i < cart.length; i += 1){
         if(cart[i].name === name){
             cart[i].qty += 1
+            showCartItems();
             return 
         }
     }
@@ -67,7 +98,8 @@ function addToCart(name, price) {
         qty: 1
     }
     cart.push(item); //pushes item object in the cart
-    console.log(cart);
+    console.log(cart)
+   
 }
 
 //---------------------------------------------------------------------------
@@ -77,15 +109,21 @@ function showCartItems() {
     cartQty.innerHTML = `You have ${qty} items in your cart`;
 
     let itemStr = ' '
+
     for(let i =0; i < cart.length; i += 1) {
-        itemStr += `<li> ${cart[i].name}
-         $${cart[i].price} x ${cart[i].qty} =  
-         $${cart[i].price * cart[i].qty} </li>`;
+        const price = cart[i].price;
+        const name = cart[i].name;
+        const quantity = cart[i].qty;
+        const itemTotal = cart[i].price * cart[i].qty;
+
+        itemStr += `<li> ${name} $${price} x ${quantity} =  $${itemTotal} 
+         <button class = "remove" data-name = "${name}" > Remove </button> 
+         <button class = "add" data-name = "${name}" >  + </button>
+         <button class = "subtract" data-name = "${name}" >  - </button </li>`;
     }
     itemList.innerHTML = itemStr;
     let total = calculateTotal();
     cartTotal.innerHTML = `Your cart total is ${total}`
-  
 }
 
 //---------------------------------------------------------------------------
@@ -111,21 +149,20 @@ function calculateTotal(){
 }
 //---------------------------------------------------------------------------
 //remove item
-function removeItem(name, qty = 0){
+function removeItem(name, qty=0){
+    console.log('Entered remove item')
     for(let i = 0; i < cart.length; i += 1){
-        if(cart[i].name === name){
+        if(name === cart[i].name){
             if (qty > 0){
+                console.log('it matches')
                 cart[i].qty -= qty;
             }
+
             if (cart[i].qty < 1 || qty === 0){
                 cart.splice(i,1)
             }
-       
-        return
-        }
+            showCartItems()
+         return
+     }
     }
 }
-
-
-
-showCartItems();
